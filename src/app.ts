@@ -13,7 +13,6 @@ class App {
 
   private config():void {
     this.app.use(express.json());
-    this.app.use('xablau');
   }
 
   public start(PORT: string | number):void {

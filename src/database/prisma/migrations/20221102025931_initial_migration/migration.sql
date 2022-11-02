@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE `users` (
-    `id` INTEGER NOT NULL,
+    `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(100) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
     `password` VARCHAR(25) NOT NULL,
@@ -13,9 +13,9 @@ CREATE TABLE `users` (
 
 -- CreateTable
 CREATE TABLE `teams` (
-    `id` INTEGER NOT NULL,
+    `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(25) NOT NULL,
-    `user_id` INTEGER NOT NULL,
+    `user_id` VARCHAR(191) NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
 
@@ -25,9 +25,9 @@ CREATE TABLE `teams` (
 
 -- CreateTable
 CREATE TABLE `players` (
-    `id` INTEGER NOT NULL,
+    `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
-    `team_id` INTEGER NOT NULL,
+    `team_id` VARCHAR(191) NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
 
@@ -36,10 +36,10 @@ CREATE TABLE `players` (
 
 -- CreateTable
 CREATE TABLE `matches` (
-    `id` INTEGER NOT NULL,
+    `id` VARCHAR(191) NOT NULL,
     `date` DATETIME(3) NOT NULL,
     `local` VARCHAR(191) NOT NULL,
-    `team_id` INTEGER NOT NULL,
+    `team_id` VARCHAR(191) NOT NULL,
     `opponent` VARCHAR(191) NOT NULL,
     `updated_at` DATETIME(3) NOT NULL,
 
@@ -48,8 +48,8 @@ CREATE TABLE `matches` (
 
 -- CreateTable
 CREATE TABLE `match_players` (
-    `player_id` INTEGER NOT NULL,
-    `match_id` INTEGER NOT NULL,
+    `player_id` VARCHAR(191) NOT NULL,
+    `match_id` VARCHAR(191) NOT NULL,
     `updated_at` DATETIME(3) NOT NULL,
 
     UNIQUE INDEX `match_players_player_id_key`(`player_id`),
@@ -59,7 +59,7 @@ CREATE TABLE `match_players` (
 
 -- CreateTable
 CREATE TABLE `events` (
-    `id` INTEGER NOT NULL,
+    `id` VARCHAR(191) NOT NULL,
     `name` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `events_id_key`(`id`)
@@ -67,12 +67,12 @@ CREATE TABLE `events` (
 
 -- CreateTable
 CREATE TABLE `match_events` (
-    `id` INTEGER NOT NULL,
-    `event_id` INTEGER NOT NULL,
-    `event_player_id` INTEGER NOT NULL,
-    `match_id` INTEGER NOT NULL,
+    `id` VARCHAR(191) NOT NULL,
+    `event_id` VARCHAR(191) NOT NULL,
+    `event_player_id` VARCHAR(191) NOT NULL,
+    `match_id` VARCHAR(191) NOT NULL,
     `has_assist` BOOLEAN NOT NULL,
-    `assist_player_id` INTEGER NOT NULL,
+    `assist_player_id` VARCHAR(191) NOT NULL,
     `game` VARCHAR(25) NOT NULL,
     `updated_at` DATETIME(3) NOT NULL,
 
@@ -81,7 +81,7 @@ CREATE TABLE `match_events` (
 
 -- CreateTable
 CREATE TABLE `match_results` (
-    `match_id` INTEGER NOT NULL,
+    `match_id` VARCHAR(191) NOT NULL,
     `second_team_score` INTEGER NOT NULL,
     `second_opp_score` INTEGER NOT NULL,
     `second_result` INTEGER NOT NULL,

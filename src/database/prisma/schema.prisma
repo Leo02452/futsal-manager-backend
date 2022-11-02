@@ -11,7 +11,7 @@ datasource db {
 }
 
 model User {
-  id        Int      @unique
+  id        String   @unique
   name      String   @db.VarChar(100)
   email     String   @unique
   password  String   @db.VarChar(25)
@@ -23,10 +23,10 @@ model User {
 }
 
 model Team {
-  id        Int      @unique
+  id        String      @unique
   name      String   @db.VarChar(25)
   user      User     @relation(fields: [userId], references: [id])
-  userId    Int      @unique          @map("user_id")
+  userId    String      @unique          @map("user_id")
   players   Player[]
   matches   Match[]
   createdAt DateTime @default(now())  @map("created_at")
@@ -36,10 +36,10 @@ model Team {
 }
 
 model Player {
-  id            Int      @unique
+  id            String      @unique
   name          String
   team          Team     @relation(fields: [teamId], references: [id])
-  teamId        Int                      @map("team_id")
+  teamId        String                      @map("team_id")
   matches       MatchPlayer[]
   createdAt     DateTime @default(now()) @map("created_at")
   updatedAt     DateTime @updatedAt      @map("updated_at")
@@ -48,11 +48,11 @@ model Player {
 }
 
 model Match {
-  id          Int      @unique
+  id          String      @unique
   date        DateTime
   local       String
   team        Team     @relation(fields: [teamId], references: [id])
-  teamId      Int      @map("team_id")
+  teamId      String      @map("team_id")
   players     MatchPlayer[]
   events      MatchEvent[]
   opponent    String
@@ -64,11 +64,11 @@ model Match {
 
 model MatchPlayer {
   player    Player   @relation(fields: [playerId], references: [id])
-  playerId  Int      @unique    @map("player_id")
+  playerId  String      @unique    @map("player_id")
   events    MatchEvent[] @relation("events")
   assists   MatchEvent[] @relation("assists")
   match     Match    @relation(fields: [matchId], references: [id])
-  matchId   Int      @unique     @map("match_id")
+  matchId   String      @unique     @map("match_id")
   updatedAt DateTime @updatedAt  @map("updated_at")
 
   @@id([playerId, matchId])
@@ -76,7 +76,7 @@ model MatchPlayer {
 }
 
 model Event {
-  id        Int      @unique
+  id        String      @unique
   name      String
   matches   MatchEvent[]
 
@@ -84,16 +84,16 @@ model Event {
 }
 
 model MatchEvent {
-  id              Int          @unique
+  id              String          @unique
   event           Event        @relation(fields: [eventId], references: [id])
-  eventId         Int          @map("event_id")
+  eventId         String          @map("event_id")
   eventPlayer     MatchPlayer  @relation(name: "events", fields: [eventPlayerId], references: [playerId])
-  eventPlayerId   Int          @map("event_player_id")
+  eventPlayerId   String          @map("event_player_id")
   match           Match        @relation(fields: [matchId], references: [id])
-  matchId         Int          @map("match_id")
+  matchId         String          @map("match_id")
   hasAssist       Boolean      @map("has_assist")
   assistPlayer    MatchPlayer  @relation(name: "assists", fields: [assistPlayerId], references: [playerId])
-  assistPlayerId  Int          @map("assist_player_id")
+  assistPlayerId  String          @map("assist_player_id")
   game            String       @db.VarChar(25)
   updatedAt       DateTime     @updatedAt  @map("updated_at")
 
@@ -102,7 +102,7 @@ model MatchEvent {
 
 model MatchResult {
   match           Match    @relation(fields: [matchId], references: [id])
-  matchId         Int      @unique     @map("match_id")
+  matchId         String      @unique     @map("match_id")
   secondTeamScore Int      @map("second_team_score")
   secondOppScore  Int      @map("second_opp_score")
   secondResult    Int      @map("second_result")
