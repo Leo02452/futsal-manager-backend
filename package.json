@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --watch \"./src/**\" ./src/server.ts",
     "test": "mocha -r ts-node/register ./tests/unit/**/*.test.ts -t 10000 --exit",
-    "test:coverage": "nyc npm run test"
+    "test:coverage": "nyc npm run test",
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,7 @@
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "15.0.0",
     "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-mocha": "9.0.0",
     "eslint-plugin-sonarjs": "0.10.0",
     "mocha": "9.2.1",
     "nodemon": "^2.0.19",
