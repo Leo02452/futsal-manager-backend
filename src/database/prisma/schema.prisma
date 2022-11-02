@@ -1,0 +1,119 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @unique
+  name      String   @db.VarChar(100)
+  email     String   @unique
+  password  String   @db.VarChar(25)
+  team      Team?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  @@map("users")
+}
+
+model Team {
+  id        Int      @unique
+  name      String   @db.VarChar(25)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int      @unique          @map("user_id")
+  players   Player[]
+  matches   Match[]
+  createdAt DateTime @default(now())  @map("created_at")
+  updatedAt DateTime @updatedAt       @map("updated_at")
+
+  @@map("teams")
+}
+
+model Player {
+  id            Int      @unique
+  name          String
+  team          Team     @relation(fields: [teamId], references: [id])
+  teamId        Int                      @map("team_id")
+  matches       MatchPlayer[]
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt      @map("updated_at")
+
+  @@map("players")
+}
+
+model Match {
+  id          Int      @unique
+  date        DateTime
+  local       String
+  team        Team     @relation(fields: [teamId], references: [id])
+  teamId      Int      @map("team_id")
+  players     MatchPlayer[]
+  events      MatchEvent[]
+  opponent    String
+  matchResult MatchResult?
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("matches")
+}
+
+model MatchPlayer {
+  player    Player   @relation(fields: [playerId], references: [id])
+  playerId  Int      @unique    @map("player_id")
+  events    MatchEvent[] @relation("events")
+  assists   MatchEvent[] @relation("assists")
+  match     Match    @relation(fields: [matchId], references: [id])
+  matchId   Int      @unique     @map("match_id")
+  updatedAt DateTime @updatedAt  @map("updated_at")
+
+  @@id([playerId, matchId])
+  @@map("match_players")
+}
+
+model Event {
+  id        Int      @unique
+  name      String
+  matches   MatchEvent[]
+
+  @@map("events")
+}
+
+model MatchEvent {
+  id              Int          @unique
+  event           Event        @relation(fields: [eventId], references: [id])
+  eventId         Int          @map("event_id")
+  eventPlayer     MatchPlayer  @relation(name: "events", fields: [eventPlayerId], references: [playerId])
+  eventPlayerId   Int          @map("event_player_id")
+  match           Match        @relation(fields: [matchId], references: [id])
+  matchId         Int          @map("match_id")
+  hasAssist       Boolean      @map("has_assist")
+  assistPlayer    MatchPlayer  @relation(name: "assists", fields: [assistPlayerId], references: [playerId])
+  assistPlayerId  Int          @map("assist_player_id")
+  game            String       @db.VarChar(25)
+  updatedAt       DateTime     @updatedAt  @map("updated_at")
+
+  @@map("match_events")
+}
+
+model MatchResult {
+  match           Match    @relation(fields: [matchId], references: [id])
+  matchId         Int      @unique     @map("match_id")
+  secondTeamScore Int      @map("second_team_score")
+  secondOppScore  Int      @map("second_opp_score")
+  secondResult    Int      @map("second_result")
+  secondTeamFoul  Int      @map("second_team_foul")
+  secondOppFoul   Int      @map("second_opp_foul")
+  firstTeamScore  Int      @map("first_team_score")
+  firstOppScore   Int      @map("first_opp_score")
+  firstResult     Int      @map("first_result")
+  firstTeamFoul   Int      @map("first_team_foul")
+  firstOppFoul    Int      @map("first_opp_foul")
+  updatedAt       DateTime @updatedAt  @map("update_at")
+
+  @@map("match_results")
+}
