@@ -29,4 +29,14 @@ describe('Create Manager', () => {
       ).to.eventually.be.equals('any-valid-token');
     });
   });
+
+  describe('On failure', () => {
+    it('should be rejected if findByEmail is rejected', () => {
+      Sinon.stub(managerRepository, 'findByEmail').rejects();
+
+      return expect(
+        createManagerService.execute(createManagerMock.validBody)
+      ).to.eventually.be.rejected;
+    });
+  });
 });
