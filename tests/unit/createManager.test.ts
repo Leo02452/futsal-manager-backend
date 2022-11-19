@@ -46,5 +46,16 @@ describe('Create Manager', () => {
         createManagerService.execute(createManagerMock.validBody)
       ).to.eventually.be.rejectedWith('User already registered');
     });
+
+    it('should be rejected if save is rejected', () => {
+      Sinon.stub(managerRepository, 'findByEmail').resolves(null);
+      Sinon.stub(idHandler, 'generate').returns('any-valid-id');
+      Sinon.stub(passwordHandler, 'encrypt').returns('any-valid-hashPassword');
+      Sinon.stub(managerRepository, 'save').rejects();
+
+      return expect(
+        createManagerService.execute(createManagerMock.validBody)
+      ).to.eventually.be.rejected;
+    });
   });
 });
