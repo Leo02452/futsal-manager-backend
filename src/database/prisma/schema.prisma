@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native"]
 }
 
 datasource db {
@@ -14,7 +15,7 @@ model User {
   id        String   @unique
   name      String   @db.VarChar(100)
   email     String   @unique
-  password  String   @db.VarChar(25)
+  password  String   @db.VarChar(100)
   team      Team?
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt      @map("updated_at")
