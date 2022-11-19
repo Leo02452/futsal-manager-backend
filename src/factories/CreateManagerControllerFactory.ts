@@ -3,12 +3,12 @@ import TokenProvider from '../providers/implementations/TokenProviderAdapter';
 import {
   createManagerSchema,
 } from '../providers/implementations/zodValidator/schemas/CreateManager';
-import PrismaManagerRepository from '../repositories/implementations/PrismaUserRepository';
+import ManagerRepository from '../repositories/implementations/ManagerRepository';
 import CreateManagerService from '../services/CreateManagerService';
 
 export default class CreateManagerControllerFactory {
   public static make() {
-    const managerRepository = new PrismaManagerRepository();
+    const managerRepository = new ManagerRepository();
     const tokenProvider = new TokenProvider();
     const createManagerService = new CreateManagerService(
       managerRepository,

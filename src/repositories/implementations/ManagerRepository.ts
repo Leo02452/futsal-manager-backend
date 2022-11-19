@@ -4,7 +4,7 @@ import { ICreateManagerRepository } from '../IManagerRepository';
 
 const prismaModel = new PrismaClient();
 
-export default class PrismaManagerRepository implements ICreateManagerRepository {
+export default class ManagerRepository implements ICreateManagerRepository {
   private _model: typeof prismaModel.user;
 
   constructor() {

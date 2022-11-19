@@ -3,14 +3,14 @@ import chaiAsPromised from "chai-as-promised";
 import Sinon from "sinon";
 import { idHandler, passwordHandler } from "../../src/entities/Manager";
 import TokenProvider from "../../src/providers/implementations/TokenProviderAdapter";
-import PrismaManagerRepository from "../../src/repositories/implementations/PrismaUserRepository";
+import ManagerRepository from "../../src/repositories/implementations/ManagerRepository";
 import CreateManagerService from "../../src/services/CreateManagerService";
 import { createManagerMock } from "../managerMock";
 
 use(chaiAsPromised);
 
 describe('Create Manager', () => {
-  const managerRepository = new PrismaManagerRepository();
+  const managerRepository = new ManagerRepository();
   const tokenProvider = new TokenProvider();
   const createManagerService = new CreateManagerService(managerRepository, tokenProvider);
   
