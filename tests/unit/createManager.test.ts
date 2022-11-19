@@ -38,5 +38,13 @@ describe('Create Manager', () => {
         createManagerService.execute(createManagerMock.validBody)
       ).to.eventually.be.rejected;
     });
+
+    it('should be rejected if email is already registered', () => {
+      Sinon.stub(managerRepository, 'findByEmail').resolves(createManagerMock.registeredManager);
+
+      return expect(
+        createManagerService.execute(createManagerMock.validBody)
+      ).to.eventually.be.rejectedWith('User already registered');
+    });
   });
 });
