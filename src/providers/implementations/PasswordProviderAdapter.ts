@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { IPasswordEncryptorProvider } from '../IPasswordProvider';
 
-export default class BcryptPasswordProvider implements IPasswordEncryptorProvider {
+export default class PasswordProviderAdapter implements IPasswordEncryptorProvider {
   private _passwordHandler: typeof bcrypt;
 
   constructor() {

@@ -1,5 +1,5 @@
 import CreateManagerController from '../controllers/CreateManagerController';
-import JwtTokenProvider from '../providers/implementations/JwtTokenProvider';
+import TokenProvider from '../providers/implementations/TokenProviderAdapter';
 import {
   createManagerSchema,
 } from '../providers/implementations/zodValidator/schemas/CreateManager';
@@ -9,7 +9,7 @@ import CreateManagerService from '../services/CreateManagerService';
 export default class CreateManagerControllerFactory {
   public static make() {
     const managerRepository = new PrismaManagerRepository();
-    const tokenProvider = new JwtTokenProvider();
+    const tokenProvider = new TokenProvider();
     const createManagerService = new CreateManagerService(
       managerRepository,
       tokenProvider,

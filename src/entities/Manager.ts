@@ -1,8 +1,8 @@
-import BcryptPasswordProvider from '../providers/implementations/BcryptPasswordProvider';
-import UuidProvider from '../providers/implementations/UuidProvider';
+import PasswordProvider from '../providers/implementations/PasswordProviderAdapter';
+import IdProvider from '../providers/implementations/IdProviderAdapter';
 
-export const idHandler = new UuidProvider();
-export const passwordHandler = new BcryptPasswordProvider();
+export const idHandler = new IdProvider();
+export const passwordHandler = new PasswordProvider();
 
 export default class Manager {
   public id: string;

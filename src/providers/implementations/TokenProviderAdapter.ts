@@ -5,7 +5,7 @@ import 'dotenv/config';
 
 const secret = process.env.JWT_SECRET || 'my_secret';
 
-export default class JwtTokenProvider implements ITokenGeneratorProvider {
+export default class TokenProviderAdapter implements ITokenGeneratorProvider {
   private _tokenHandler;
   private _secret: string;
   private _signOptions: jwt.SignOptions;

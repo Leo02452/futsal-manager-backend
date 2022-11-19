@@ -2,7 +2,7 @@ import { expect, use } from "chai";
 import chaiAsPromised from "chai-as-promised";
 import Sinon from "sinon";
 import { idHandler, passwordHandler } from "../../src/entities/Manager";
-import JwtTokenProvider from "../../src/providers/implementations/JwtTokenProvider";
+import TokenProvider from "../../src/providers/implementations/TokenProviderAdapter";
 import PrismaManagerRepository from "../../src/repositories/implementations/PrismaUserRepository";
 import CreateManagerService from "../../src/services/CreateManagerService";
 import { createManagerMock } from "../managerMock";
@@ -11,7 +11,7 @@ use(chaiAsPromised);
 
 describe('Create Manager', () => {
   const managerRepository = new PrismaManagerRepository();
-  const tokenProvider = new JwtTokenProvider();
+  const tokenProvider = new TokenProvider();
   const createManagerService = new CreateManagerService(managerRepository, tokenProvider);
   
   afterEach(Sinon.restore);

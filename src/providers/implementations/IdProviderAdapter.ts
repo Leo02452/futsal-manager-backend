@@ -1,7 +1,7 @@
 import * as uuid from 'uuid';
 import { IIdGeneratorProvider } from '../IIdProvider';
 
-export default class UuidProvider implements IIdGeneratorProvider {
+export default class IdProviderAdapter implements IIdGeneratorProvider {
   private _idHandler: typeof uuid;
 
   constructor() {
