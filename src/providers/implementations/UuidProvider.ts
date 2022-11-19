@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import * as uuid from 'uuid';
 import { IIdGeneratorProvider } from '../IIdProvider';
 
 export default class UuidProvider implements IIdGeneratorProvider {
