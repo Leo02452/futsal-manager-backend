@@ -1,4 +1,5 @@
 import express from 'express';
+import managerRoutes from './routes/ManagerRoutes';
 
 class App {
   public app: express.Express;
@@ -8,11 +9,12 @@ class App {
 
     this.config();
 
-    this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.app.get('/', (_req, res) => res.json({ ok: true }));
   }
 
   private config():void {
     this.app.use(express.json());
+    this.app.use('/managers', managerRoutes);
   }
 
   public start(PORT: string | number):void {
