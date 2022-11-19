@@ -9,5 +9,12 @@ export const createManagerMock = {
     id: 'any-valid-id',
     name: 'any-valid-name',
     email: 'any-valid-email',
+  },
+
+  registeredManager: {
+    id: 'any-valid-id',
+    name: 'any-valid-name',
+    email: 'any-valid-email',
+    password: 'any-valid-hash-password'
   }
 }
