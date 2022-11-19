@@ -57,5 +57,17 @@ describe('Create Manager', () => {
         createManagerService.execute(createManagerMock.validBody)
       ).to.eventually.be.rejected;
     });
+
+    it('should be rejected if tokenProvider throws', () => {
+      Sinon.stub(managerRepository, 'findByEmail').resolves(null);
+      Sinon.stub(idHandler, 'generate').returns('any-valid-id');
+      Sinon.stub(passwordHandler, 'encrypt').returns('any-valid-hashPassword');
+      Sinon.stub(managerRepository, 'save').resolves(createManagerMock.savedManager);
+      Sinon.stub(tokenProvider, 'generate').throws();
+
+      return expect(
+        createManagerService.execute(createManagerMock.validBody)
+      ).to.eventually.be.rejected;
+    });
   });
 });
