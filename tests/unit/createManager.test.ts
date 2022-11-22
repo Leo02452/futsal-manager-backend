@@ -1,7 +1,7 @@
 import { expect, use } from "chai";
 import chaiAsPromised from "chai-as-promised";
 import Sinon from "sinon";
-import { idHandler, passwordHandler } from "../../src/entities/Manager";
+import ManagerFactory from "../../src/factories/ManagerFactory";
 import TokenProvider from "../../src/providers/implementations/TokenProviderAdapter";
 import ManagerRepository from "../../src/repositories/implementations/ManagerRepository";
 import CreateManagerService from "../../src/services/CreateManagerService";
@@ -12,15 +12,19 @@ use(chaiAsPromised);
 describe('Create Manager', () => {
   const managerRepository = new ManagerRepository();
   const tokenProvider = new TokenProvider();
-  const createManagerService = new CreateManagerService(managerRepository, tokenProvider);
+  const managerFactory = new ManagerFactory();
+  const createManagerService = new CreateManagerService(
+    managerRepository,
+    tokenProvider,
+    managerFactory,
+  );
   
   afterEach(Sinon.restore);
 
   describe('On success', () => {
     it('should be return a token', () => {
       Sinon.stub(managerRepository, 'findByEmail').resolves(null);
-      Sinon.stub(idHandler, 'generate').returns('any-valid-id');
-      Sinon.stub(passwordHandler, 'encrypt').returns('any-valid-hashPassword');
+      Sinon.stub(managerFactory, 'make').returns(createManagerMock.registeredManager);
       Sinon.stub(managerRepository, 'save').resolves(createManagerMock.savedManager);
       Sinon.stub(tokenProvider, 'generate').returns('any-valid-token');
 
@@ -47,10 +51,18 @@ describe('Create Manager', () => {
       ).to.eventually.be.rejectedWith('User already registered');
     });
 
+    it('should be rejected if factory make is rejected', () => {
+      Sinon.stub(managerRepository, 'findByEmail').resolves(null);
+      Sinon.stub(managerFactory, 'make').throws();
+
+      return expect(
+        createManagerService.execute(createManagerMock.validBody)
+      ).to.eventually.be.rejected;
+    });
+
     it('should be rejected if save is rejected', () => {
       Sinon.stub(managerRepository, 'findByEmail').resolves(null);
-      Sinon.stub(idHandler, 'generate').returns('any-valid-id');
-      Sinon.stub(passwordHandler, 'encrypt').returns('any-valid-hashPassword');
+      Sinon.stub(managerFactory, 'make').returns(createManagerMock.registeredManager);
       Sinon.stub(managerRepository, 'save').rejects();
 
       return expect(
@@ -60,8 +72,7 @@ describe('Create Manager', () => {
 
     it('should be rejected if tokenProvider throws', () => {
       Sinon.stub(managerRepository, 'findByEmail').resolves(null);
-      Sinon.stub(idHandler, 'generate').returns('any-valid-id');
-      Sinon.stub(passwordHandler, 'encrypt').returns('any-valid-hashPassword');
+      Sinon.stub(managerFactory, 'make').returns(createManagerMock.registeredManager);
       Sinon.stub(managerRepository, 'save').resolves(createManagerMock.savedManager);
       Sinon.stub(tokenProvider, 'generate').throws();
 
