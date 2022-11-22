@@ -5,7 +5,7 @@ import ManagerFactory from "../../src/factories/ManagerFactory";
 import TokenProvider from "../../src/providers/implementations/TokenProviderAdapter";
 import ManagerRepository from "../../src/repositories/implementations/ManagerRepository";
 import CreateManagerService from "../../src/services/CreateManagerService";
-import { createManagerMock } from "../managerMock";
+import { createManagerMock } from "../mocks/managerMock";
 
 use(chaiAsPromised);
 
