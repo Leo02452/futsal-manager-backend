@@ -1,4 +1,4 @@
-import Manager from '../entities/Manager';
+import { IManagerFactory } from '../factories/IManagerFactory';
 import ConflictError from '../helpers/errors/ConflictError';
 import { createManagerDTO } from '../providers/implementations/zodValidator/schemas/CreateManager';
 import { ITokenGeneratorProvider } from '../providers/ITokenProvider';
@@ -8,6 +8,7 @@ export default class CreateManagerService {
   constructor(
     private _managerRepository: ICreateManagerRepository,
     private _tokenProvider: ITokenGeneratorProvider,
+    private _managerFactory: IManagerFactory,
   ) { }
 
   async execute(data: createManagerDTO) {
@@ -15,7 +16,7 @@ export default class CreateManagerService {
 
     if (managerAlreadyExists) throw new ConflictError('User');
 
-    const manager = new Manager(data);
+    const manager = this._managerFactory.make(data);
 
     const managerWithoutPassword = await this._managerRepository.save(manager);
 
