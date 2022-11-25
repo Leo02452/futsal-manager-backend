@@ -1,6 +1,9 @@
-import { ICreatedManager, IManagerWithoutPassword } from '../entities/IManager';
+import { ICreatedManager, IManager, IManagerWithoutPassword } from '../entities/IManager';
 
-export interface ICreateManagerRepository {
+export interface IFindManagerByEmail {
   findByEmail(email: string): Promise<ICreatedManager | null>
-  save(manager: ICreatedManager): Promise<IManagerWithoutPassword>
+}
+
+export interface ICreateManagerRepository extends IFindManagerByEmail {
+  save(manager: Omit<IManager, 'id'>): Promise<IManagerWithoutPassword>
 }
