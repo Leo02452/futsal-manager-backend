@@ -5,6 +5,8 @@ export interface ICreatedManager {
   name: string
   email: string
   password: string
+  createdAt: Date
+  updatedAt: Date
 }
 
 export interface IManager {
@@ -14,6 +16,6 @@ export interface IManager {
   password: string
 }
 
-export type IManagerWithoutPassword = Omit<ICreatedManager, 'password'>;
+export type IManagerWithoutPassword = Omit<IManager, 'password'>;
 
 export interface IManagerTokenPayload extends JwtPayload, IManagerWithoutPassword { }
