@@ -1,7 +1,9 @@
 import bcrypt from 'bcrypt';
-import { IPasswordEncryptorProvider } from '../IPasswordProvider';
+import { IPasswordEncryptorProvider, IPasswordValidatorProvider } from '../IPasswordProvider';
 
-export default class PasswordProviderAdapter implements IPasswordEncryptorProvider {
+export default class PasswordProviderAdapter implements
+IPasswordEncryptorProvider,
+IPasswordValidatorProvider {
   private _passwordHandler: typeof bcrypt;
 
   constructor() {
@@ -12,5 +14,11 @@ export default class PasswordProviderAdapter implements IPasswordEncryptorProvid
     const salt = this._passwordHandler.genSaltSync(5);
     const hashPassword = this._passwordHandler.hashSync(password, salt);
     return hashPassword;
+  }
+
+  async validate(password: string, hashPassword: string): Promise<boolean> {
+    const isCorrectPassword = await this._passwordHandler.compare(password, hashPassword);
+
+    return isCorrectPassword;
   }
 }
