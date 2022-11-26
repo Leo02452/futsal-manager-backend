@@ -22,7 +22,7 @@ describe('Create Manager', () => {
   afterEach(Sinon.restore);
 
   describe('On success', () => {
-    it('should be return a token', () => {
+    it('should return a token', () => {
       Sinon.stub(managerRepository, 'findByEmail').resolves(null);
       Sinon.stub(managerFactory, 'make').returns(createManagerMock.registeredManager);
       Sinon.stub(managerRepository, 'save').resolves(createManagerMock.savedManager);

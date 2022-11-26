@@ -15,8 +15,15 @@ export const createManagerMock = {
     id: 'any-valid-id',
     name: 'any-valid-name',
     email: 'any-valid-email',
+    password: 'any-valid-hash-password',
     createdAt: new Date(),
     updatedAt: new Date()
-    password: 'any-valid-hash-password'
+  }
+}
+
+export const loginMock = {
+  validBody: {
+    email: 'any-valid-email',
+    password: 'any-valid-password'
   }
 }
