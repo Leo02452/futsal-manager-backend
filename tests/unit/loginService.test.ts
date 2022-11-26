@@ -32,4 +32,14 @@ describe('loginService', () => {
       ).to.eventually.be.equals('any-valid-token');
     });
   });
+
+  describe('On failure', () => {
+    it('should be rejected if findByEmail is rejected', () => {
+      sinon.stub(managerRepository, 'findByEmail').rejects();
+
+      return expect(
+        loginService.execute(loginMock.validBody)
+      ).to.eventually.be.rejected;
+    });
+  });
 });
