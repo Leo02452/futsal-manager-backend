@@ -1,4 +1,8 @@
 import express from 'express';
+import 'express-async-errors';
+import managerRoutes from './routes/ManagerRoutes';
+import authRoutes from './routes/AuthRoutes';
+import errorHandler from './middlewares/errorHandler';
 
 class App {
   public app: express.Express;
@@ -8,11 +12,14 @@ class App {
 
     this.config();
 
-    this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.app.get('/', (_req, res) => res.json({ ok: true }));
   }
 
   private config():void {
     this.app.use(express.json());
+    this.app.use('/managers', managerRoutes);
+    this.app.use('/login', authRoutes);
+    this.app.use(errorHandler);
   }
 
   public start(PORT: string | number):void {
