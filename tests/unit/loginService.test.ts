@@ -41,5 +41,13 @@ describe('loginService', () => {
         loginService.execute(loginMock.validBody)
       ).to.eventually.be.rejected;
     });
+
+    it('should be rejected if email is not registered', () => {
+      sinon.stub(managerRepository, 'findByEmail').resolves(null);
+
+      return expect(
+        loginService.execute(loginMock.validBody)
+      ).to.eventually.be.rejectedWith('Incorrect email or password');
+    });
   });
 });
