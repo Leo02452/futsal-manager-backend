@@ -67,5 +67,15 @@ describe('loginService', () => {
         loginService.execute(loginMock.validBody)
       ).to.eventually.be.rejectedWith('Incorrect email or password');
     });
+
+    it('should be rejected if token generator throws an error', () => {
+      sinon.stub(managerRepository, 'findByEmail').resolves(createManagerMock.registeredManager);
+      sinon.stub(passwordProvider, 'validate').resolves(true);
+      sinon.stub(tokenProvider, 'generate').throws();
+
+      return expect(
+        loginService.execute(loginMock.validBody)
+      ).to.eventually.be.rejected;
+    });
   });
 });
