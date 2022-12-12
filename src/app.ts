@@ -1,8 +1,10 @@
 import express from 'express';
 import 'express-async-errors';
-import managerRoutes from './routes/ManagerRoutes';
-import authRoutes from './routes/AuthRoutes';
-import playerRoutes from './routes/PlayerRoutes';
+import {
+  authRoutes,
+  managerRoutes,
+  playerRoutes,
+} from './routes';
 import errorHandler from './middlewares/errorHandler';
 
 class App {
