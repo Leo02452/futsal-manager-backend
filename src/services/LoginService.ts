@@ -1,4 +1,4 @@
-import UnauthorizedError from '../helpers/errors/UnauthorizedError';
+import { UnauthorizedError } from '../helpers/errors';
 import { loginDTO } from '../providers/implementations/zodValidator/schemas/Login';
 import { IPasswordValidatorProvider } from '../providers/IPasswordProvider';
 import { ITokenGeneratorProvider } from '../providers/ITokenProvider';

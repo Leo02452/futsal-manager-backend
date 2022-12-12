@@ -1,5 +1,5 @@
 import { IManagerFactory } from '../factories/IManagerFactory';
-import ConflictError from '../helpers/errors/ConflictError';
+import { ConflictError } from '../helpers/errors';
 import { createManagerDTO } from '../providers/implementations/zodValidator/schemas/CreateManager';
 import { ITokenGeneratorProvider } from '../providers/ITokenProvider';
 import { ICreateManagerRepository } from '../repositories/IManagerRepository';
