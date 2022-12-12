@@ -1,4 +1,4 @@
-import UnprocessableEntityError from '../../helpers/errors/UnprocessableEntityError';
+import { UnprocessableEntityError } from '../../helpers/errors';
 import IdProviderAdapter from '../../providers/implementations/IdProviderAdapter';
 import { ICreatePlayerDTO } from '../../providers/implementations/zodValidator/schemas/Player';
 

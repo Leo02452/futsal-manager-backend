@@ -1,5 +1,5 @@
 import { IPlayerFactory } from '../factories/IPlayerFactory';
-import ConflictError from '../helpers/errors/ConflictError';
+import { ConflictError } from '../helpers/errors';
 import { ICreatePlayerDTO } from '../providers/implementations/zodValidator/schemas/Player';
 import { ICreatePlayerRepository } from '../repositories/IPlayerRepository';
 
