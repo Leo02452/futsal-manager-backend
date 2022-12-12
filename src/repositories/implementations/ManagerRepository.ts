@@ -1,8 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import prismaModel from '../../database/prisma/index';
 import { ICreatedManager, IManagerWithoutPassword } from '../../entities/IManager';
 import { ICreateManagerRepository, IFindManagerByEmail } from '../IManagerRepository';
-
-const prismaModel = new PrismaClient();
 
 export default class ManagerRepository implements
 ICreateManagerRepository,
