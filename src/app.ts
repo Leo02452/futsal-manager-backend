@@ -2,6 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import managerRoutes from './routes/ManagerRoutes';
 import authRoutes from './routes/AuthRoutes';
+import playerRoutes from './routes/PlayerRoutes';
 import errorHandler from './middlewares/errorHandler';
 
 class App {
@@ -19,6 +20,7 @@ class App {
     this.app.use(express.json());
     this.app.use('/managers', managerRoutes);
     this.app.use('/login', authRoutes);
+    this.app.use('/players', playerRoutes);
     this.app.use(errorHandler);
   }
 
