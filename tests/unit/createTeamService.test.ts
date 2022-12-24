@@ -32,5 +32,15 @@ describe('Create Team Service', () => {
       ).to.eventually.be.equals(undefined);
     });
 
+    it('should not be rejected', () => {
+      sinon.stub(teamFactory, 'make').returns(teamMock.createdTeam);
+      sinon.stub(playerFactory, 'make').returns(teamMock.createdPlayers);
+      sinon.stub(teamRepository, 'save').resolves();
+
+      return expect(
+        createTeamService.execute(teamMock.validBody)
+      ).to.not.eventually.be.rejected;
+    });
+  });
   });
 });
