@@ -4,6 +4,7 @@ import {
   authRoutes,
   managerRoutes,
   playerRoutes,
+  teamRoutes,
 } from './routes';
 import errorHandler from './middlewares/errorHandler';
 
@@ -23,6 +24,7 @@ class App {
     this.app.use('/managers', managerRoutes);
     this.app.use('/login', authRoutes);
     this.app.use('/players', playerRoutes);
+    this.app.use('/teams', teamRoutes);
     this.app.use(errorHandler);
   }
 
