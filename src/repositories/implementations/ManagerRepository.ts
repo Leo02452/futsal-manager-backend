@@ -5,11 +5,9 @@ import { ICreateManagerRepository, IFindManagerByEmail } from '../IManagerReposi
 export default class ManagerRepository implements
 ICreateManagerRepository,
 IFindManagerByEmail {
-  private _model: typeof prismaModel.user;
-
-  constructor() {
-    this._model = prismaModel.user;
-  }
+  constructor(
+    private _model: typeof prismaModel.user,
+  ) { }
 
   async findByEmail(email: string): Promise<ICreatedManager | null> {
     const manager = await this._model.findFirst({ where: { email } });

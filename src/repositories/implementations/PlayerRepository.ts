@@ -4,11 +4,9 @@ import { ICreatePlayerRepository } from '../IPlayerRepository';
 
 export default class PlayerRepository implements
 ICreatePlayerRepository {
-  private _model: typeof prismaModel.player;
-
-  constructor() {
-    this._model = prismaModel.player;
-  }
+  constructor(
+    private _model: typeof prismaModel.player,
+  ) { }
 
   async findByName(name: string, teamId: string): Promise<ICreatedPlayer | null> {
     // eslint-disable-next-line @typescript-eslint/naming-convention

@@ -1,6 +1,7 @@
 import { expect, use } from 'chai';
 import chaiAsPromised from "chai-as-promised";
 import sinon from 'sinon';
+import prismaModel from '../../src/database/prisma';
 import PasswordProviderAdapter from '../../src/providers/implementations/PasswordProviderAdapter';
 import TokenProviderAdapter from '../../src/providers/implementations/TokenProviderAdapter';
 import ManagerRepository from '../../src/repositories/implementations/ManagerRepository';
@@ -10,7 +11,7 @@ import { createManagerMock, loginMock } from '../mocks/managerMock';
 use(chaiAsPromised);
 
 describe('loginService', () => {
-  const managerRepository = new ManagerRepository();
+  const managerRepository = new ManagerRepository(prismaModel.user);
   const passwordProvider = new PasswordProviderAdapter();
   const tokenProvider = new TokenProviderAdapter();
   const loginService = new LoginService(
