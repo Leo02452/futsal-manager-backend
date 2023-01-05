@@ -72,5 +72,15 @@ describe('Create Team Service', () => {
         createTeamService.execute(teamMock.validBody)
       ).to.eventually.be.rejected;
     });
+
+    it('should be rejected if teamRepository save fails', () => {
+      sinon.stub(teamFactory, 'make').returns(teamMock.createdTeam);
+      sinon.stub(playerFactory, 'make').returns(teamMock.createdPlayers);
+      sinon.stub(teamRepository, 'save').rejects();
+
+      return expect(
+        createTeamService.execute(teamMock.validBody)
+      ).to.eventually.be.rejected;
+    });
   });
 });
