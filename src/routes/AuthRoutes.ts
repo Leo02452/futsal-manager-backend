@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import LoginControllerFactory from '../factories/LoginControllerFactory';
+import LoginControllerFactory from '../factories/implementations/LoginControllerFactory';
 
 const loginController = LoginControllerFactory.make();
 const route = Router();

@@ -2,7 +2,7 @@ import { expect, use } from "chai";
 import chaiAsPromised from "chai-as-promised";
 import Sinon from "sinon";
 import prismaModel from "../../src/database/prisma";
-import ManagerFactory from "../../src/factories/ManagerFactory";
+import ManagerFactory from "../../src/factories/implementations/ManagerFactory";
 import TokenProvider from "../../src/providers/implementations/TokenProviderAdapter";
 import ManagerRepository from "../../src/repositories/implementations/ManagerRepository";
 import CreateManagerService from "../../src/services/CreateManagerService";
