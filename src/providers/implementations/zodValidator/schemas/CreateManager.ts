@@ -3,16 +3,16 @@ import { z } from 'zod';
 
 const createManagerSchema = z.object({
   name: z.string({
-    required_error: 'Missing params: name',
-    invalid_type_error: 'name must be a string',
+    required_error: 'Parâmetro ausente: name',
+    invalid_type_error: 'Valor de name deve ser do tipo texto',
   }),
   email: z.string({
-    required_error: 'Missing params: email',
-    invalid_type_error: 'email must be a string',
+    required_error: 'Parâmetro ausente: email',
+    invalid_type_error: 'Valor de email deve ser do tipo texto',
   }).email(),
   password: z.string({
-    required_error: 'Missing params: password',
-    invalid_type_error: 'password must be a string',
+    required_error: 'Parâmetro ausente: password',
+    invalid_type_error: 'Valor de password deve ser do tipo texto',
   }),
 });
 

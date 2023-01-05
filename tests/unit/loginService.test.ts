@@ -47,7 +47,7 @@ describe('loginService', () => {
 
       return expect(
         loginService.execute(loginMock.validBody)
-      ).to.eventually.be.rejectedWith('Incorrect email or password');
+      ).to.eventually.be.rejectedWith('Email ou senha incorretos.');
     });
 
     it('should be rejected if password validate is rejected', () => {
@@ -65,7 +65,7 @@ describe('loginService', () => {
 
       return expect(
         loginService.execute(loginMock.validBody)
-      ).to.eventually.be.rejectedWith('Incorrect email or password');
+      ).to.eventually.be.rejectedWith('Email ou senha incorretos.');
     });
 
     it('should be rejected if token generator throws an error', () => {

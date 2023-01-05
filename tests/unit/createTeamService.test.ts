@@ -56,7 +56,7 @@ describe('Create Team Service', () => {
     it('should be rejected if a players name length is less than 3 characters', () => {
       sinon.stub(teamFactory, 'make').returns(teamMock.createdTeam);
       sinon.stub(playerFactory, 'make').throws(new UnprocessableEntityError(
-        'player\'s name length must be at least 3 characters long'
+        'Nome do jogador precisa ter pelo menos 3 caracteres.'
       ));
 
       return expect(

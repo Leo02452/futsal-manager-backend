@@ -48,7 +48,7 @@ describe('Create Manager', () => {
 
       return expect(
         createManagerService.execute(createManagerMock.validBody)
-      ).to.eventually.be.rejectedWith('User already registered');
+      ).to.eventually.be.rejectedWith('Usuário já cadastrado.');
     });
 
     it('should be rejected if factory make is rejected', () => {
