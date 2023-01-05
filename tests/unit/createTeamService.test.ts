@@ -63,5 +63,14 @@ describe('Create Team Service', () => {
         createTeamService.execute(teamMock.validBody)
       ).to.eventually.be.rejectedWith(UnprocessableEntityError);
     });
+
+    it('should be rejected if playerFactory make fails for other reason', () => {
+      sinon.stub(teamFactory, 'make').returns(teamMock.createdTeam);
+      sinon.stub(playerFactory, 'make').throws();
+
+      return expect(
+        createTeamService.execute(teamMock.validBody)
+      ).to.eventually.be.rejected;
+    });
   });
 });
