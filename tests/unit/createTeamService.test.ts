@@ -42,5 +42,14 @@ describe('Create Team Service', () => {
       ).to.not.eventually.be.rejected;
     });
   });
+
+  describe('On failure', () => {
+    it('should be rejected if teamFactory make fails', () => {
+      sinon.stub(teamFactory, 'make').throws();
+
+      return expect(
+        createTeamService.execute(teamMock.validBody)
+      ).to.eventually.be.rejected;
+    });
   });
 });
