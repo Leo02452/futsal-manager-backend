@@ -10,7 +10,7 @@ import { createManagerMock } from "../mocks/managerMock";
 
 use(chaiAsPromised);
 
-describe('Create Manager', () => {
+describe('Create Manager Service', () => {
   const managerRepository = new ManagerRepository(prismaModel.user);
   const tokenProvider = new TokenProvider();
   const managerFactory = new ManagerFactory();

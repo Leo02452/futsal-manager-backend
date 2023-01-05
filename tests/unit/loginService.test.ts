@@ -10,7 +10,7 @@ import { createManagerMock, loginMock } from '../mocks/managerMock';
 
 use(chaiAsPromised);
 
-describe('loginService', () => {
+describe('Login Service', () => {
   const managerRepository = new ManagerRepository(prismaModel.user);
   const passwordProvider = new PasswordProviderAdapter();
   const tokenProvider = new TokenProviderAdapter();
