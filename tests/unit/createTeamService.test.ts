@@ -4,6 +4,7 @@ import sinon from "sinon";
 import prismaModel from "../../src/database/prisma";
 import PlayerFactory from "../../src/factories/implementations/PlayerFactory";
 import TeamFactory from "../../src/factories/implementations/TeamFactory";
+import { UnprocessableEntityError } from "../../src/helpers/errors";
 import TeamRepository from "../../src/repositories/implementations/TeamRepository";
 import CreateTeamService from "../../src/services/CreateTeamService";
 import { teamMock } from "../mocks/teamMock";
@@ -50,6 +51,17 @@ describe('Create Team Service', () => {
       return expect(
         createTeamService.execute(teamMock.validBody)
       ).to.eventually.be.rejected;
+    });
+
+    it('should be rejected if a players name length is less than 3 characters', () => {
+      sinon.stub(teamFactory, 'make').returns(teamMock.createdTeam);
+      sinon.stub(playerFactory, 'make').throws(new UnprocessableEntityError(
+        'player\'s name length must be at least 3 characters long'
+      ));
+
+      return expect(
+        createTeamService.execute(teamMock.validBody)
+      ).to.eventually.be.rejectedWith(UnprocessableEntityError);
     });
   });
 });
