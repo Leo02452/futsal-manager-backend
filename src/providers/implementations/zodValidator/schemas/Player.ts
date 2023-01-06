@@ -3,12 +3,12 @@ import { z } from 'zod';
 
 const createPlayerSchema = z.object({
   name: z.string({
-    required_error: 'Missing params: name',
-    invalid_type_error: 'name must be a string',
+    required_error: 'Parâmetro ausente: name',
+    invalid_type_error: 'Valor de name deve ser do tipo texto',
   }),
   teamId: z.string({
-    required_error: 'Missing params: teamId',
-    invalid_type_error: 'teamId must be a string',
+    required_error: 'Parâmetro ausente: teamId',
+    invalid_type_error: 'Valor de teamId deve ser do tipo texto',
   }),
 });
 

@@ -14,11 +14,10 @@ export default class Player {
 
     if (props.name.length < 3) {
       throw new UnprocessableEntityError(
-        'player\'s name length must be at least 3 characters long',
+        'Nome do jogador precisa ter pelo menos 3 caracteres.',
       );
-    } else {
-      this.name = props.name;
     }
+    this.name = props.name;
 
     if (!id) {
       this.id = idHandler.generate();

@@ -14,6 +14,6 @@ export default class CreatePlayerController {
 
     await this._createPlayerService.execute(dto);
 
-    return { status: 201, body: { message: 'Player registered!' } };
+    return { status: 201, body: { message: 'Jogador criado com sucesso!' } };
   }
 }

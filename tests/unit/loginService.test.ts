@@ -1,6 +1,7 @@
 import { expect, use } from 'chai';
 import chaiAsPromised from "chai-as-promised";
 import sinon from 'sinon';
+import prismaModel from '../../src/database/prisma';
 import PasswordProviderAdapter from '../../src/providers/implementations/PasswordProviderAdapter';
 import TokenProviderAdapter from '../../src/providers/implementations/TokenProviderAdapter';
 import ManagerRepository from '../../src/repositories/implementations/ManagerRepository';
@@ -9,8 +10,8 @@ import { createManagerMock, loginMock } from '../mocks/managerMock';
 
 use(chaiAsPromised);
 
-describe('loginService', () => {
-  const managerRepository = new ManagerRepository();
+describe('Login Service', () => {
+  const managerRepository = new ManagerRepository(prismaModel.user);
   const passwordProvider = new PasswordProviderAdapter();
   const tokenProvider = new TokenProviderAdapter();
   const loginService = new LoginService(
@@ -47,7 +48,7 @@ describe('loginService', () => {
 
       return expect(
         loginService.execute(loginMock.validBody)
-      ).to.eventually.be.rejectedWith('Incorrect email or password');
+      ).to.eventually.be.rejectedWith('Email ou senha incorretos.');
     });
 
     it('should be rejected if password validate is rejected', () => {
@@ -65,7 +66,7 @@ describe('loginService', () => {
 
       return expect(
         loginService.execute(loginMock.validBody)
-      ).to.eventually.be.rejectedWith('Incorrect email or password');
+      ).to.eventually.be.rejectedWith('Email ou senha incorretos.');
     });
 
     it('should be rejected if token generator throws an error', () => {

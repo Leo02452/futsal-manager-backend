@@ -12,7 +12,7 @@ export default class CreatePlayerService {
   async execute(data: ICreatePlayerDTO): Promise<void> {
     const playerAlreadyExists = await this._playerRepository.findByName(data.name, data.teamId);
 
-    if (playerAlreadyExists) throw new ConflictError('Player');
+    if (playerAlreadyExists) throw new ConflictError('Jogador');
 
     const player = this._playerFactory.make(data);
 

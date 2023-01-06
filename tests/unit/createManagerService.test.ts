@@ -1,7 +1,8 @@
 import { expect, use } from "chai";
 import chaiAsPromised from "chai-as-promised";
 import Sinon from "sinon";
-import ManagerFactory from "../../src/factories/ManagerFactory";
+import prismaModel from "../../src/database/prisma";
+import ManagerFactory from "../../src/factories/implementations/ManagerFactory";
 import TokenProvider from "../../src/providers/implementations/TokenProviderAdapter";
 import ManagerRepository from "../../src/repositories/implementations/ManagerRepository";
 import CreateManagerService from "../../src/services/CreateManagerService";
@@ -9,8 +10,8 @@ import { createManagerMock } from "../mocks/managerMock";
 
 use(chaiAsPromised);
 
-describe('Create Manager', () => {
-  const managerRepository = new ManagerRepository();
+describe('Create Manager Service', () => {
+  const managerRepository = new ManagerRepository(prismaModel.user);
   const tokenProvider = new TokenProvider();
   const managerFactory = new ManagerFactory();
   const createManagerService = new CreateManagerService(
@@ -48,7 +49,7 @@ describe('Create Manager', () => {
 
       return expect(
         createManagerService.execute(createManagerMock.validBody)
-      ).to.eventually.be.rejectedWith('User already registered');
+      ).to.eventually.be.rejectedWith('Usuário já cadastrado.');
     });
 
     it('should be rejected if factory make is rejected', () => {

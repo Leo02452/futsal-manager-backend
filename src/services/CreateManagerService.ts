@@ -14,7 +14,7 @@ export default class CreateManagerService {
   async execute(data: createManagerDTO) {
     const managerAlreadyExists = await this._managerRepository.findByEmail(data.email);
 
-    if (managerAlreadyExists) throw new ConflictError('User');
+    if (managerAlreadyExists) throw new ConflictError('Usuário');
 
     const manager = this._managerFactory.make(data);
 

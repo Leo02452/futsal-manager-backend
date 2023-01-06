@@ -14,11 +14,11 @@ export default class LoginService {
   async execute(data: loginDTO): Promise<string> {
     const user = await this._managerRepository.findByEmail(data.email);
 
-    if (!user) throw new UnauthorizedError('Incorrect email or password');
+    if (!user) throw new UnauthorizedError('Email ou senha incorretos.');
 
     const isCorrectPassword = await this._passwordProvider.validate(data.password, user.password);
 
-    if (!isCorrectPassword) throw new UnauthorizedError('Incorrect email or password');
+    if (!isCorrectPassword) throw new UnauthorizedError('Email ou senha incorretos.');
 
     const { password, createdAt, updatedAt, ...userWithoutPassword } = user;
 

@@ -1,5 +1,5 @@
-import PasswordProvider from '../providers/implementations/PasswordProviderAdapter';
-import IdProvider from '../providers/implementations/IdProviderAdapter';
+import IdProvider from '../../providers/implementations/IdProviderAdapter';
+import PasswordProvider from '../../providers/implementations/PasswordProviderAdapter';
 
 export const idHandler = new IdProvider();
 export const passwordHandler = new PasswordProvider();

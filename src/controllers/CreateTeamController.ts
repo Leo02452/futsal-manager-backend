@@ -14,6 +14,6 @@ export default class CreateTeamController {
 
     await this.createTeamService.execute(dto);
 
-    return { status: 201, body: { message: 'Team registered!' } };
+    return { status: 201, body: { message: 'Time criado com sucesso!' } };
   }
 }
