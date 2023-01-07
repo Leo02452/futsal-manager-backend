@@ -2,6 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import {
   authRoutes,
+  eventRoutes,
   managerRoutes,
   playerRoutes,
   teamRoutes,
@@ -25,6 +26,7 @@ class App {
     this.app.use('/login', authRoutes);
     this.app.use('/players', playerRoutes);
     this.app.use('/teams', teamRoutes);
+    this.app.use('/events', eventRoutes);
     this.app.use(errorHandler);
   }
 
