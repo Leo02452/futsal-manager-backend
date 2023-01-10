@@ -1,4 +1,4 @@
-import { Identifiable } from './GeneralInterfaces';
+import { DBMetaInformation, Identifiable } from './GeneralInterfaces';
 import { IPlayer } from './IPlayer';
 
 export interface ITeam extends
@@ -7,3 +7,7 @@ export interface ITeam extends
   userId: string
   players: IPlayer[]
 }
+
+export interface ICreatedTeam extends
+  Omit<ITeam, 'players'>,
+  DBMetaInformation { }
