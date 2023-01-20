@@ -1,8 +1,10 @@
 import prismaModel from '../../database/prisma';
-import { ITeam } from '../../entities/ITeam';
-import { ICreateTeamRepository } from '../ITeamRepository';
+import { ICreatedTeam, ITeam } from '../../entities/ITeam';
+import { ICreateTeamRepository, IFindTeamByIdRepository } from '../ITeamRepository';
 
-export default class TeamRepository implements ICreateTeamRepository {
+export default class TeamRepository implements
+ICreateTeamRepository,
+IFindTeamByIdRepository {
   constructor(
     private _model: typeof prismaModel.team,
   ) { }
@@ -23,5 +25,13 @@ export default class TeamRepository implements ICreateTeamRepository {
         },
       },
     });
+  }
+
+  async findById(id: string): Promise<ICreatedTeam | null> {
+    const team = await this._model.findFirst({
+      where: { id },
+    });
+
+    return team;
   }
 }
