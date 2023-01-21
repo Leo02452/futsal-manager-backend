@@ -1,9 +1,10 @@
 import prismaModel from '../../database/prisma';
-import { IMatch } from '../../entities/IMatch';
-import { ICreateMatchRepository } from '../IMatchRepository';
+import { ICreatedMatch, IMatch } from '../../entities/IMatch';
+import { ICreateMatchRepository, IListMatchesRepository } from '../IMatchRepository';
 
 export default class MatchRepository implements
-ICreateMatchRepository {
+ICreateMatchRepository,
+IListMatchesRepository {
   constructor(
     private _model: typeof prismaModel.match,
   ) { }
@@ -12,5 +13,9 @@ ICreateMatchRepository {
     await this._model.create({
       data: match,
     });
+  }
+
+  async getAll(): Promise<ICreatedMatch[]> {
+    return this._model.findMany();
   }
 }
