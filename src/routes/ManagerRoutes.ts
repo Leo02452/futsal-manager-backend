@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import CreateManagerControllerFactory from '../factories/implementations/CreateManagerControllerFactory';
+import CreateManagerControllerFactory
+  from '../factories/implementations/CreateManagerControllerFactory';
 
 const createManagerController = CreateManagerControllerFactory.make();
 

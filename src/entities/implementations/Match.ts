@@ -5,7 +5,7 @@ export const idHandler = new IdProviderAdapter();
 
 export default class Match {
   id: string;
-  date: string;
+  date: Date;
   local: string;
   teamId: string;
   opponent: string;
