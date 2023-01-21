@@ -1,10 +1,10 @@
 import { z } from 'zod';
 
 const createMatchSchema = z.object({
-  date: z.string(),
   local: z.string(),
   teamId: z.string(),
   opponent: z.string(),
+  date: z.preprocess((string) => new Date(string as string), z.date()),
 });
 
 type ICreateMatchDTO = z.infer<typeof createMatchSchema>;
