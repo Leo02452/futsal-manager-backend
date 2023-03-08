@@ -2,6 +2,7 @@ import { expect, use } from "chai";
 import chaiAsPromised from "chai-as-promised";
 import sinon from "sinon";
 import prismaModel from "../../src/database/prisma";
+import { NotFoundError } from "../../src/helpers/errors";
 import MatchPlayerRepository from "../../src/repositories/implementations/MatchPlayerRepository";
 import PlayerRepository from "../../src/repositories/implementations/PlayerRepository";
 import CreateMatchPlayerService from "../../src/services/CreateMatchPlayerService";
@@ -38,4 +39,13 @@ describe('Create Match Player Service', () => {
     });
   });
 
+  describe('On failure', () => {
+    it('should be rejected if player id is not found', () => {
+      sinon.stub(playerRepository, 'findByParam').throws(new NotFoundError('Jogador'));
+
+      return expect(
+        createMatchPlayerService.execute(createMatchPlayerMock.validDTO)
+      ).to.eventually.be.rejectedWith('Jogador não encontrado');
+    });
+  });
 });
