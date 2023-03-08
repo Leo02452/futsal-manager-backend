@@ -1,10 +1,15 @@
 import prismaModel from '../../database/prisma/index';
 import { ICreatedPlayer, IPlayer } from '../../entities/IPlayer';
-import { ICreatePlayerRepository, IListPlayersRepository } from '../IPlayerRepository';
+import {
+  ICreatePlayerRepository,
+  IFindPlayerRepository,
+  IListPlayersRepository,
+} from '../IPlayerRepository';
 
 export default class PlayerRepository implements
 ICreatePlayerRepository,
-IListPlayersRepository {
+IListPlayersRepository,
+IFindPlayerRepository {
   constructor(
     private _model: typeof prismaModel.player,
   ) { }
@@ -23,5 +28,9 @@ IListPlayersRepository {
     return this._model.findMany({
       where: { id: teamId },
     });
+  }
+
+  findByParam(param: string, value: string): Promise<ICreatedPlayer | null> {
+    return this._model.findUnique({ where: { [param]: value } });
   }
 }
