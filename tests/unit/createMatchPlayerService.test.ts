@@ -28,6 +28,14 @@ describe('Create Match Player Service', () => {
       ).to.eventually.be.equals(undefined);
     });
 
+    it('should not be rejected', () => {
+      sinon.stub(playerRepository, 'findByParam').resolves();
+      sinon.stub(matchPlayerRepository, 'save').resolves();
+
+      return expect(
+        createMatchPlayerService.execute(createMatchPlayerMock.validDTO)
+      ).to.not.eventually.be.rejected;
+    });
   });
 
 });
