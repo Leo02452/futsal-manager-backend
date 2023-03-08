@@ -47,5 +47,14 @@ describe('Create Match Player Service', () => {
         createMatchPlayerService.execute(createMatchPlayerMock.validDTO)
       ).to.eventually.be.rejectedWith('Jogador não encontrado');
     });
+
+    it('should be rejected if matchPlayerRepository save is rejected', () => {
+      sinon.stub(playerRepository, 'findByParam').resolves();
+      sinon.stub(matchPlayerRepository, 'save').rejects();
+
+      return expect(
+        createMatchPlayerService.execute(createMatchPlayerMock.validDTO)
+      ).to.eventually.be.rejected;
+    });
   });
 });
