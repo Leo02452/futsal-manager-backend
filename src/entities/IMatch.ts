@@ -9,3 +9,8 @@ export interface ICreatedMatch extends
   IMatch {
   updatedAt: Date
 }
+
+export interface IMatchPlayer {
+  playerId: string
+  matchId: string
+}
