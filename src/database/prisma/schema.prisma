@@ -16,8 +16,8 @@ model User {
   email     String   @unique
   password  String   @db.VarChar(25)
   team      Team?
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt      @map("updated_at")
+  createdAt DateTime @default(now())  @map("created_at")
+  updatedAt DateTime @updatedAt       @map("updated_at")
 
   @@map("users")
 }
@@ -39,7 +39,7 @@ model Player {
   id            String        @unique
   name          String
   team          Team          @relation(fields: [teamId], references: [id])
-  teamId        String                         @map("team_id")
+  teamId        String                        @map("team_id")
   matches       MatchPlayer[]
   createdAt     DateTime      @default(now()) @map("created_at")
   updatedAt     DateTime      @updatedAt      @map("updated_at")
@@ -53,12 +53,12 @@ model Match {
   date        DateTime
   local       String
   team        Team            @relation(fields: [teamId], references: [id])
-  teamId      String          @map("team_id")
+  teamId      String                      @map("team_id")
   players     MatchPlayer[]
   events      MatchEvent[]
   opponent    String
   matchResult MatchResult?
-  updatedAt   DateTime        @updatedAt @map("updated_at")
+  updatedAt   DateTime        @updatedAt  @map("updated_at")
 
   @@map("matches")
 }
@@ -83,36 +83,36 @@ model Event {
 }
 
 model MatchEvent {
-  id              String       @unique
-  event           Event        @relation(fields: [eventId], references: [id])
-  eventId         String       @map("event_id")
-  eventPlayer     Player  @relation(name: "events", fields: [eventPlayerId], references: [id])
-  eventPlayerId   String       @map("event_player_id")
-  match           Match        @relation(fields: [matchId], references: [id])
-  matchId         String       @map("match_id")
-  hasAssist       Boolean      @map("has_assist")
-  assistPlayer    Player  @relation(name: "assists", fields: [assistPlayerId], references: [id])
-  assistPlayerId  String       @map("assist_player_id")
-  game            String       @db.VarChar(25)
-  updatedAt       DateTime     @updatedAt  @map("updated_at")
+  id              String    @unique
+  event           Event     @relation(fields: [eventId], references: [id])
+  eventId         String                @map("event_id")
+  eventPlayer     Player    @relation(name: "events", fields: [eventPlayerId], references: [id])
+  eventPlayerId   String                @map("event_player_id")
+  match           Match     @relation(fields: [matchId], references: [id])
+  matchId         String                @map("match_id")
+  hasAssist       Boolean               @map("has_assist")
+  assistPlayer    Player?   @relation(name: "assists", fields: [assistPlayerId], references: [id])
+  assistPlayerId  String                @map("assist_player_id")
+  game            String    @db.VarChar(25)
+  updatedAt       DateTime  @updatedAt  @map("updated_at")
 
   @@map("match_events")
 }
 
 model MatchResult {
-  match           Match    @relation(fields: [matchId], references: [id])
-  matchId         String   @unique     @map("match_id")
-  secondTeamScore Int      @map("second_team_score")
-  secondOppScore  Int      @map("second_opp_score")
-  secondResult    Int      @map("second_result")
-  secondTeamFoul  Int      @map("second_team_foul")
-  secondOppFoul   Int      @map("second_opp_foul")
-  firstTeamScore  Int      @map("first_team_score")
-  firstOppScore   Int      @map("first_opp_score")
-  firstResult     Int      @map("first_result")
-  firstTeamFoul   Int      @map("first_team_foul")
-  firstOppFoul    Int      @map("first_opp_foul")
-  updatedAt       DateTime @updatedAt  @map("update_at")
+  match           Match     @relation(fields: [matchId], references: [id])
+  matchId         String    @unique     @map("match_id")
+  secondTeamScore Int                   @map("second_team_score")
+  secondOppScore  Int                   @map("second_opp_score")
+  secondResult    Int                   @map("second_result")
+  secondTeamFoul  Int                   @map("second_team_foul")
+  secondOppFoul   Int                   @map("second_opp_foul")
+  firstTeamScore  Int                   @map("first_team_score")
+  firstOppScore   Int                   @map("first_opp_score")
+  firstResult     Int                   @map("first_result")
+  firstTeamFoul   Int                   @map("first_team_foul")
+  firstOppFoul    Int                   @map("first_opp_foul")
+  updatedAt       DateTime  @updatedAt  @map("update_at")
 
   @@map("match_results")
 }
