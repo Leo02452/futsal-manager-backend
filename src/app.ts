@@ -8,6 +8,7 @@ import {
   teamRoutes,
   matchRoutes,
   matchPlayerRoutes,
+  matchEventRoutes,
 } from './routes';
 import errorHandler from './middlewares/errorHandler';
 
@@ -31,6 +32,7 @@ class App {
     this.app.use('/events', eventRoutes);
     this.app.use('/matches', matchRoutes);
     this.app.use('/matchPlayers', matchPlayerRoutes);
+    this.app.use('/matchEvents', matchEventRoutes);
     this.app.use(errorHandler);
   }
 
