@@ -92,7 +92,7 @@ model MatchEvent {
   matchId         String                @map("match_id")
   hasAssist       Boolean               @map("has_assist")
   assistPlayer    Player?   @relation(name: "assists", fields: [assistPlayerId], references: [id])
-  assistPlayerId  String                @map("assist_player_id")
+  assistPlayerId  String?               @map("assist_player_id")
   game            String    @db.VarChar(25)
   updatedAt       DateTime  @updatedAt  @map("updated_at")
 
