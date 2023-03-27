@@ -1,10 +1,10 @@
 import { PrismaClient } from '@prisma/client';
 import {
   events,
-  user,
   match,
   players,
   team,
+  user,
 } from './seeders/data';
 
 const prisma = new PrismaClient();

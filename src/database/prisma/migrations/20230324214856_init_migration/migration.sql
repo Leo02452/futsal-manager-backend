@@ -70,7 +70,7 @@ CREATE TABLE `match_events` (
     `event_player_id` VARCHAR(191) NOT NULL,
     `match_id` VARCHAR(191) NOT NULL,
     `has_assist` BOOLEAN NOT NULL,
-    `assist_player_id` VARCHAR(191) NOT NULL,
+    `assist_player_id` VARCHAR(191) NULL,
     `game` VARCHAR(25) NOT NULL,
     `updated_at` DATETIME(3) NOT NULL,
 
@@ -120,7 +120,7 @@ ALTER TABLE `match_events` ADD CONSTRAINT `match_events_event_player_id_fkey` FO
 ALTER TABLE `match_events` ADD CONSTRAINT `match_events_match_id_fkey` FOREIGN KEY (`match_id`) REFERENCES `matches`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `match_events` ADD CONSTRAINT `match_events_assist_player_id_fkey` FOREIGN KEY (`assist_player_id`) REFERENCES `players`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `match_events` ADD CONSTRAINT `match_events_assist_player_id_fkey` FOREIGN KEY (`assist_player_id`) REFERENCES `players`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `match_results` ADD CONSTRAINT `match_results_match_id_fkey` FOREIGN KEY (`match_id`) REFERENCES `matches`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
