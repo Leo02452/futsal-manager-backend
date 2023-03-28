@@ -5,6 +5,7 @@ import teamRoutes from './TeamRoutes';
 import eventRoutes from './EventRoutes';
 import matchRoutes from './MatchRoutes';
 import matchPlayerRoutes from './MatchPlayerRoute';
+import matchEventRoutes from './MatchEventRoutes';
 
 export {
   authRoutes,
@@ -14,4 +15,5 @@ export {
   eventRoutes,
   matchRoutes,
   matchPlayerRoutes,
+  matchEventRoutes,
 };
