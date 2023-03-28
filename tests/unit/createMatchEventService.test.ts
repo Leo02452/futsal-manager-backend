@@ -28,4 +28,13 @@ describe.only('Create Match Event Service', () => {
       ).to.eventually.be.equals(createMatchEventMock.created.id);
     });
   });
+  describe('On Failure', () => {
+    it('should be rejected if factory throws an error', () => {
+      sinon.stub(matchEventFactory, 'make').throws();
+
+      return expect(
+        createdMatchEventService.execute(createMatchEventMock.validDTO)
+      ).to.eventually.be.rejected;
+    });
+  });
 });
