@@ -36,5 +36,14 @@ describe.only('Create Match Event Service', () => {
         createdMatchEventService.execute(createMatchEventMock.validDTO)
       ).to.eventually.be.rejected;
     });
+
+    it('should be rejected if matchEventRepository save is rejected', () => {
+      sinon.stub(matchEventFactory, 'make').returns(createMatchEventMock.created);
+      sinon.stub(matchEventRepository, 'save').rejects();
+
+      return expect(
+        createdMatchEventService.execute(createMatchEventMock.validDTO)
+      ).to.eventually.be.rejected;
+    });
   });
 });
