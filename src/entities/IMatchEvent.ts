@@ -1,9 +1,15 @@
-import { ICreateMatchEventDTO } from '../providers/implementations/zodValidator/schemas/MatchEvent';
 import { ConnectForeignKey, Identifiable } from './GeneralInterfaces';
 
 export interface ICreatedMatchEvent extends
-  Identifiable,
-  ICreateMatchEventDTO { }
+  Identifiable {
+  eventId: string
+  eventPlayerId: string
+  matchId: string
+  hasAssist: boolean
+  assistPlayerId: string | null,
+  game: string
+  updatedAt: Date
+}
 
 export interface IMatchEventToSave {
   id: string
