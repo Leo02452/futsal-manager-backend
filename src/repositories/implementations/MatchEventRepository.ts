@@ -1,10 +1,18 @@
 import prismaModel from '../../database/prisma';
 import { ICreatedMatchEvent, IMatchEventToSave } from '../../entities/IMatchEvent';
-import { ICreateMatchEventRepository, IFindMatchEventsRepository } from '../IMatchEventRepository';
+import {
+  IUpdateMatchEventDTO,
+} from '../../providers/implementations/zodValidator/schemas/MatchEvent';
+import {
+  ICreateMatchEventRepository,
+  IFindMatchEventsRepository,
+  IUpdateMatchEventRepository,
+} from '../IMatchEventRepository';
 
 export default class MatchEventRepository implements
 ICreateMatchEventRepository,
-IFindMatchEventsRepository {
+IFindMatchEventsRepository,
+IUpdateMatchEventRepository {
   constructor(
     private _model: typeof prismaModel.matchEvent,
   ) { }
@@ -30,5 +38,12 @@ IFindMatchEventsRepository {
     });
 
     return matchEventsList;
+  }
+
+  async update(id: string, data: IUpdateMatchEventDTO): Promise<void> {
+    await this._model.update({
+      where: { id },
+      data,
+    });
   }
 }
