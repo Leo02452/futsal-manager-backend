@@ -1,6 +1,13 @@
 import { z } from 'zod';
 
-const createMatchEventSchema = z.object({
+const updateMatchEventSchema = z.object({
+  eventId: z.string(),
+  eventPlayerId: z.string(),
+  hasAssist: z.boolean(),
+  assistPlayerId: z.string().optional(),
+});
+
+const createMatchEventSchema = updateMatchEventSchema.extend({
   eventId: z.string(),
   eventPlayerId: z.string(),
   matchId: z.string(),
@@ -13,5 +20,11 @@ const createMatchEventSchema = z.object({
   });
 
 type ICreateMatchEventDTO = z.infer<typeof createMatchEventSchema>;
+type IUpdateMatchEventDTO = z.infer<typeof updateMatchEventSchema>;
 
-export { createMatchEventSchema, ICreateMatchEventDTO };
+export {
+  createMatchEventSchema,
+  updateMatchEventSchema,
+  ICreateMatchEventDTO,
+  IUpdateMatchEventDTO,
+};
