@@ -5,6 +5,7 @@ import {
 } from '../../providers/implementations/zodValidator/schemas/MatchEvent';
 import {
   ICreateMatchEventRepository,
+  IDeleteMatchEventRepository,
   IFindMatchEventsRepository,
   IUpdateMatchEventRepository,
 } from '../IMatchEventRepository';
@@ -12,7 +13,8 @@ import {
 export default class MatchEventRepository implements
 ICreateMatchEventRepository,
 IFindMatchEventsRepository,
-IUpdateMatchEventRepository {
+IUpdateMatchEventRepository,
+IDeleteMatchEventRepository {
   constructor(
     private _model: typeof prismaModel.matchEvent,
   ) { }
@@ -44,6 +46,12 @@ IUpdateMatchEventRepository {
     await this._model.update({
       where: { id },
       data,
+    });
+  }
+
+  async delete(id: string): Promise<void> {
+    await this._model.delete({
+      where: { id },
     });
   }
 }

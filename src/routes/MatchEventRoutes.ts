@@ -5,10 +5,13 @@ import ListMatchEventsControllerFactory
   from '../factories/implementations/ListMatchEventsControllerFactory';
 import UpdateMatchEventControllerFactory
   from '../factories/implementations/UpdateMatchEventControllerFactory';
+import DeleteMatchEventControllerFactory
+  from '../factories/implementations/DeleteMatchEventControllerFactory';
 
 const createMatchEventController = CreateMatchEventControllerFactory.make();
 const listMatchEventsController = ListMatchEventsControllerFactory.make();
 const updateMatchEventController = UpdateMatchEventControllerFactory.make();
+const deleteMatchEventController = DeleteMatchEventControllerFactory.make();
 
 const route = Router();
 
@@ -32,6 +35,14 @@ route.put(
   '/:id',
   async (req, res) => {
     const response = await updateMatchEventController.handle(req);
+    return res.status(response.status).json(response.body);
+  },
+);
+
+route.delete(
+  '/:id',
+  async (req, res) => {
+    const response = await deleteMatchEventController.handle(req);
     return res.status(response.status).json(response.body);
   },
 );

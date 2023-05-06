@@ -12,3 +12,7 @@ export interface IFindMatchEventsRepository {
 export interface IUpdateMatchEventRepository {
   update(id: string, data: IUpdateMatchEventDTO): Promise<void>
 }
+
+export interface IDeleteMatchEventRepository {
+  delete(id: string): Promise<void>
+}
